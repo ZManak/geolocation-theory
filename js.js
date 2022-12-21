@@ -19,8 +19,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(mapBuses);
 
-//marcador personalizado
-
 //Personalización de markers
 var metroMarker = L.icon({
   iconUrl: './assets/marker.png',
@@ -42,7 +40,6 @@ async function getBuses() {
   return buses;
 }
 
-//let arrMetros = [];
 let arrBuses = [];
 
 getBuses()
@@ -55,14 +52,8 @@ getBuses()
   }
   )
 
-// let mapa = document.getElementById("mapMetros");
-// function refresh() {
-//   mapa.contentWindow.reload(true, 3000);
-//  }
 const arrMetros = [];
 setInterval(function () {
-  mapMetros.invalidateSize();
-  //parent.document.getElementById("iFrame").reload();
   getMetros()
     .then(metros => {
       for (marker of arrMetros) {
@@ -74,7 +65,7 @@ setInterval(function () {
         arrMetros.push(marker);
       }
     }
-  )
+    )
 }, 3000);
 
 /*
@@ -94,24 +85,20 @@ let polygon = L.polygon([
 circle.bindPopup("I am a circle.");
 polygon.bindPopup("I am a polygon.");*/
 
-L.tileLayer(MAPBOX_API, {
-  attribution: ATTRIBUTION,
-  maxZoom: 18,
-  id: 'mapbox/streets-v11',
-  tileSize: 512,
-  zoomOffset: -1,
-  accessToken: ACCESS_TOKEN
-}).addTo(mapMetros);
+  L.tileLayer(MAPBOX_API, {
+    attribution: ATTRIBUTION,
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: ACCESS_TOKEN
+  }).addTo(mapMetros);
 
-L.tileLayer(MAPBOX_API, {
-  attribution: ATTRIBUTION,
-  maxZoom: 18,
-  id: 'mapbox/navigation-night-v1',
-  tileSize: 512,
-  zoomOffset: -1,
-  accessToken: ACCESS_TOKEN
-}).addTo(mapBuses);
-
-/*let layer = L.marker([metro.position.latitude, metro.position.longitude], { icon: metroMarker }).addTo(mapMetros);
-layer.addTo(map);
-layer.remove();*/
+  L.tileLayer(MAPBOX_API, {
+    attribution: ATTRIBUTION,
+    maxZoom: 18,
+    id: 'mapbox/navigation-night-v1',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: ACCESS_TOKEN
+  }).addTo(mapBuses);
